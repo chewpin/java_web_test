@@ -12,17 +12,12 @@
 <nav class="navbar navbar-inverse navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <a class = "navbar-brand"> Get history of website </a>
+        <a class = "navbar-brand"> See history state for website </a>
         <button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
           </button>
-      </div>
-      <div class="collapse navbar-collapse navHeaderCollapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li> <a> Home </a> </li>
-        </ul>
       </div>
     </div>
   </nav>
@@ -35,23 +30,41 @@
     <div class = "col-md-8 col-md-offset-2">
       <div class = "panel panel-default">
         <div class = "panel-body">
-          <div class = "page-header col-md-offset-2">
-            <h3 > Insert information
-            </h3>
-          </div>
-          <div class="form-group">
-            <form method="post" action="view" class = "form-horizontal">
-                <label for="url" class = "col-lg-2 control-label">Website url&emsp;</label>
-                <input type="text" id="url" name="url" class="form-control form-control-inline" pattern="[A-Za-z0-9_].{2,20}" maxlength="20" title="3 to 20 characters" required /><br>
-                <label for="date_time" class = "col-lg-4 control-label">Date&emsp;</label>
-                <input type="text" id="date_time" name="date_time" class="form-control form-control-inline" class="form-control" maxlength="20" required /><br>
-              <p>
-              	<input type="hidden" name="op" value="view">
-                <input type="submit" value="View" class="btn btn-success pull-right">
-              </p>
-              
-            </form>
-          </div>
+          <table class="table table-striped"> 
+          	 <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr>
+	              <div> 
+	                <td class = "col-md-1">
+	                </td>
+	                <form method="post" action="view" class = "form-horizontal">
+	                <td class = "col-md-2">
+		                <label for="url" class = "col-lg-2 control-label">Website url&emsp;</label>
+		                <input type="text" id="url" name="url" class="form-control form-control-inline" pattern="[A-Za-z0-9_].{2,20}" maxlength="20" title="3 to 20 characters" required /><br>
+		            </td>
+	                <td class = "col-md-2">
+	                    <label for="date_time" class = "col-lg-4 control-label">Date&emsp;</label>
+		                <input type="text" id="date_time" name="date_time" class="form-control form-control-inline" class="form-control" maxlength="20" required /><br> 
+	                </td> 
+	                <td>
+		                <input type="hidden" name="op" value="view">
+	               		<input type="submit" value="View" class="btn btn-success pull-right">
+	                </td>
+		            </form>
+	                
+	              </div>
+	            </tr>
+	            <tr>
+	            </tr>
+          
+          
+          
+          	
+          </table>
         </div>
       </div>
     </div>
