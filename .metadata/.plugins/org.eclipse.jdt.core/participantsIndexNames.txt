@@ -9,3 +9,5 @@ INDEX VERSION 1.126
 /FirstSelvletProject/src
 /Users/jessicachen/Documents/java_workspace/web/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1507297845.index
 /LoginServlet/src
+/Users/jessicachen/Documents/java_workspace/web/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1985502808.index
+/LoginServlet/src
