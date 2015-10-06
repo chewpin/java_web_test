@@ -71,21 +71,22 @@
 	          </table>
 	          <table class="table table-striped">  
 	          	 <tr>
-	                <th></th>
+	                <th> This is the content of <%
+							String url_1 = (String) request.getAttribute("original_url");
+							String date_time_1 = (String) request.getAttribute("date_time");
+							out.println(" " + url_1 + " on "+ date_time_1);
+						%> </th>
 	              </tr>
 	          		<tr>
-		            <td class = "col-md-1">
 		            <div class = "row"> 
+		            <td class = "col-md-3">
+		            	<p>
 		            	<%
 							String url = (String) request.getAttribute("url");
-							out.println("Fetching information for: "+ url);
-						%></p><p>
-						<%
-							String date_time = (String) request.getAttribute("date_time");
-							out.println("with state on date: "+ date_time);
+							out.println(url);
 						%></p>
-		            </div>
 		            </td>
+		            </div>
 		            </tr>
 	          </table>
 	        </div>

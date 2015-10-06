@@ -1,0 +1,132 @@
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.TreeSet;
+import java.util.Vector;
+import java.sql.PreparedStatement;
+
+/**
+ * Servlet implementation class LoginServlet
+ */
+//@WebServlet("/LoginServlet")
+@WebServlet(
+        description = "Login Servlet", 
+        urlPatterns = { "/LoginServlet" }, 
+        initParams = { 
+                @WebInitParam(name = "user", value = "jessica"), 
+                @WebInitParam(name = "password", value = "chen")
+        })
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	public static final String HTML_START="<html><body>";
+    public static final String HTML_END="</body></html>";
+    
+    public void init() throws ServletException {
+        //we can create DB connection resource here and set it to Servlet context
+        if(getServletContext().getInitParameter("dbURL").equals("jdbc:mysql://localhost/mysql_db") &&
+                getServletContext().getInitParameter("dbUser").equals("mysql_user") &&
+                getServletContext().getInitParameter("dbUserPwd").equals("mysql_pwd"))
+        getServletContext().setAttribute("DB_Success", "True");
+        else throw new ServletException("DB Connection error");
+    }
+    
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LoginServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+//		 PrintWriter out = response.getWriter();
+//	     Date date = new Date();
+//	     out.println(HTML_START + "<h2>Hi There!</h2><br/><h3>Date="+date +"</h3>"+HTML_END);
+	   
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		// TODO Auto-generated method stub
+//	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getParameter("view_url")!=null) {
+	        //get request parameters for userID and password
+	        String url_1 = request.getParameter("view_url");
+			String url = HTML_START + "<h2>Hi There!</h2><br/><h3>Date="+url_1 +"</h3>"+HTML_END;
+			String date_time = request.getParameter("view_date_time");
+	         
+	        //logging example
+	        log("url="+url+"::date_time="+date_time);
+	        
+	        request.setAttribute("url", url);
+	        request.setAttribute("date_time", date_time);
+	        //Servlet JSP communication
+			RequestDispatcher reqDispatcher = getServletConfig().getServletContext().getRequestDispatcher("/jsps/hello.jsp");
+			reqDispatcher.forward(request,response);
+	        
+	         
+	        RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
+	        PrintWriter out= response.getWriter();
+	        out.println("<font color=red> url: " + url + ", date_time: " + date_time + ".</font>");
+	        rd.include(request, response);
+	           
+		}
+         
+    }
+	public void findAgeInfo(Long user_id) throws SQLException {
+//      this.oldestFriend = new UserInfo(1L, "Oliver", "Oldham");
+//      this.youngestFriend = new UserInfo(25L, "Yolanda", "Young");
+      
+	  String young_first, young_last;
+      int young_id = 0;
+      String old_first, old_last;
+      int old_id = 0;
+      
+      // old
+      Statement stmt = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      ResultSet rst = stmt.executeQuery( "select f.user1_id, f.user2_id, u.user_id, u.first_name, u.last_name from " + userTableName + " u, " + friendsTableName + " f where f.user1_id = " + user_id + " and f.user2_id = u.user_id order by u.year_of_birth asc, u.month_of_birth asc, u.day_of_birth asc, u.user_id desc" );
+      rst.next();
+      old_id = rst.getLong(2);
+      old_first = rst.getString(4);
+      old_last = rst.getString(5);
+      
+      // young
+      Statement stmt2 = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+      ResultSet rst = stmt.executeQuery( "select f.user1_id, f.user2_id, u.user_id, u.first_name, u.last_name from " + userTableName + " u, " + friendsTableName + " f where f.user1_id = " + user_id + " and f.user2_id = u.user_id order by u.year_of_birth desc, u.month_of_birth desc, u.day_of_birth desc, u.user_id desc" );
+      rst.next();
+      young_id = rst.getLong(2);
+      young_first = rst.getString(4);
+      young_id = rst.getString(5);
+      
+      this.oldestFriend = new UserInfo(old_id, old_first, old_last);
+      this.youngestFriend = new UserInfo(young_id, young_first, young_last);
+      
+      rst.close();
+      stmt.close();
+      stmt2.close();
+		
+	}
+
+}
