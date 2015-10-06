@@ -71,6 +71,7 @@
 	          </table>
 	          <table class="table table-striped">  
 	          	 <tr>
+	          	    <% if (request.getAttribute("original_url") != null) {%>
 	                <th> This is the content of <%
 							String url_1 = (String) request.getAttribute("original_url");
 							String date_time_1 = (String) request.getAttribute("date_time");
@@ -86,6 +87,7 @@
 							out.println(url);
 						%></p>
 		            </td>
+		            <%}%>
 		            </div>
 		            </tr>
 	          </table>
