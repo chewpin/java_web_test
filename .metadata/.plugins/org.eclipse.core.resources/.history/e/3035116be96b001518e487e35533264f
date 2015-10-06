@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.sql.DriverManager;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,6 +54,17 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+//		 PrintWriter out = response.getWriter();
+//	     Date date = new Date();
+//	     out.println(HTML_START + "<h2>Hi There!</h2><br/><h3>Date="+date +"</h3>"+HTML_END);
+		log("\n\n\nBACK!!\n\n\n");
+		String op = request.getParameter("op");
+		if("back".equals(op)) {
+			log("BACK!!");
+			String url = "/hello.html";
+		    request.getRequestDispatcher(url).forward(request,response);
+		}
 	}
 
 	/**
@@ -64,7 +75,12 @@ public class LoginServlet extends HttpServlet {
 //	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String op = request.getParameter("op");
-		if("view_result".equals(op)) {
+		if("back".equals(op)) {
+			log("BACK!!");
+			String url = "/hello.html";
+		    request.getRequestDispatcher(url).forward(request,response);
+		}
+		else if("view_result".equals(op)) {
 	        //get request parameters for userID and password
 	        String url_1 = request.getParameter("view_url");
 			String date_time = request.getParameter("view_date_time");
@@ -101,14 +117,9 @@ public class LoginServlet extends HttpServlet {
 		next_date = format.format(c.getTime());
 		log("month="+month+"::day="+day+"::year="+year);
 		log("next date=" + next_date);
-		
-		// need JDBC database access
 //		Statement stmt = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 //	    ResultSet rst = stmt.executeQuery("select content from CrawlerTable where url = " + url + "year = " + year + " and month = " + month + " and day = " + day );
-//	    	  
-		// while current date has no record, roll back to last day and check if there's any record for that 
-		// until find a record that represents the version starting from that day
-		// return the page content to display on the web page
+//	    	    
 //	    while (!rst.wasNull()){
 //	    	c = Calendar.getInstance();
 //			c.setTime(format.parse(next_date));
@@ -125,14 +136,5 @@ public class LoginServlet extends HttpServlet {
 
 		
 	}
-	
-	// need JDBC database access
-//	
-//	public void connect() {
-//		Connection connection = null;
-//		connection = DriverManager.getConnection(
-//			"jdbc:oracle:thin:@localhost:1234:example","username","password");
-//		connection.close();
-//	}
 
 }

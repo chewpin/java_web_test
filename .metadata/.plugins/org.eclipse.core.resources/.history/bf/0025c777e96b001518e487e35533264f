@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=US-ASCII"
+    pageEncoding="US-ASCII"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -10,7 +14,7 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script>
  $(function() {
-	 $( "#datepicker" ).datepicker({ maxDate: "+0D" });
+	$( "#datepicker" ).datepicker({ maxDate: "+1D" });
 }); 
 </script>
 	
@@ -20,7 +24,7 @@
 <nav class="navbar navbar-inverse navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <a class = "navbar-brand"> See history state for website </a>
+        <a href = "" class = "navbar-brand"> See history state for website </a>
         <button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -36,13 +40,13 @@
 	      <div class = "panel panel-default">
 	        <div class = "panel-body">
 	          <table class="table table-striped"> 
-	          	 <tr>
+	          	<tr>
 		        	<form method="post" action="LoginServlet" class = "form-horizontal">
 	                <th></th>
 	                <th>Website url&emsp;</th>
 	                <th>Date&emsp;</th>
 	                <th>
-	                 <input type="hidden" name="op" value="view_result">
+	                 <input type="hidden" name="op" value="view_view">
 		             <input type="submit" value="View" class="btn btn-success pull-right">
 	                </th>
 	              </tr>
@@ -59,18 +63,42 @@
 		              </div>
 			     	</form>
 		          </tr>
-		          <tr>
-		          </tr>
+		            
 	          
 	          
 	          
 	          	
+	          </table>
+	          <table class="table table-striped">  
+	          	 <tr>
+	          	    <% if (request.getAttribute("original_url") != null) {%>
+	                <th> This is the content of <%
+							String url_1 = (String) request.getAttribute("original_url");
+							String date_time_1 = (String) request.getAttribute("date_time");
+							out.println(" " + url_1 + " on "+ date_time_1);
+						%> </th>
+	              </tr>
+	          		<tr>
+		            <div class = "row"> 
+		            <td class = "col-md-3">
+		            	<p>
+		            	<%
+							String url = (String) request.getAttribute("url");
+							out.println(url);
+						%></p>
+		            </td>
+		            <%}%>
+		            </div>
+		            </tr>
 	          </table>
 	        </div>
 	      </div>
 	    </div>
 	  </div>
 	</div>
+	
+	
+	
 	
 	
 	

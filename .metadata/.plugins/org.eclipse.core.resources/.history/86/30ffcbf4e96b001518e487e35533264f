@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -102,13 +104,9 @@ public class LoginServlet extends HttpServlet {
 		log("month="+month+"::day="+day+"::year="+year);
 		log("next date=" + next_date);
 		
-		// need JDBC database access
 //		Statement stmt = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 //	    ResultSet rst = stmt.executeQuery("select content from CrawlerTable where url = " + url + "year = " + year + " and month = " + month + " and day = " + day );
-//	    	  
-		// while current date has no record, roll back to last day and check if there's any record for that 
-		// until find a record that represents the version starting from that day
-		// return the page content to display on the web page
+//	    	    
 //	    while (!rst.wasNull()){
 //	    	c = Calendar.getInstance();
 //			c.setTime(format.parse(next_date));
@@ -126,13 +124,11 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 	
-	// need JDBC database access
-//	
-//	public void connect() {
-//		Connection connection = null;
-//		connection = DriverManager.getConnection(
-//			"jdbc:oracle:thin:@localhost:1234:example","username","password");
-//		connection.close();
-//	}
+	public void connect() {
+		Connection connection = null;
+		connection = DriverManager.getConnection(
+			"jdbc:oracle:thin:@localhost:1521:mkyong","username","password");
+		connection.close();
+	}
 
 }

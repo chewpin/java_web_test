@@ -102,13 +102,9 @@ public class LoginServlet extends HttpServlet {
 		log("month="+month+"::day="+day+"::year="+year);
 		log("next date=" + next_date);
 		
-		// need JDBC database access
 //		Statement stmt = oracleConnection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 //	    ResultSet rst = stmt.executeQuery("select content from CrawlerTable where url = " + url + "year = " + year + " and month = " + month + " and day = " + day );
-//	    	  
-		// while current date has no record, roll back to last day and check if there's any record for that 
-		// until find a record that represents the version starting from that day
-		// return the page content to display on the web page
+//	    	    
 //	    while (!rst.wasNull()){
 //	    	c = Calendar.getInstance();
 //			c.setTime(format.parse(next_date));
@@ -126,7 +122,7 @@ public class LoginServlet extends HttpServlet {
 		
 	}
 	
-	// need JDBC database access
+	// need database access
 //	
 //	public void connect() {
 //		Connection connection = null;

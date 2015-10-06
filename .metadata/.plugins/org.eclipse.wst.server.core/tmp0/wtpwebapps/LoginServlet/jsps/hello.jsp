@@ -24,7 +24,7 @@
 <nav class="navbar navbar-inverse navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
-        <a href = "" class = "navbar-brand"> See history state for website </a>
+        <a class = "navbar-brand"> See history state for website </a>
         <button class = "navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>

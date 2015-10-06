@@ -108,7 +108,6 @@ public class LoginServlet extends HttpServlet {
 //	    	  
 		// while current date has no record, roll back to last day and check if there's any record for that 
 		// until find a record that represents the version starting from that day
-		// return the page content to display on the web page
 //	    while (!rst.wasNull()){
 //	    	c = Calendar.getInstance();
 //			c.setTime(format.parse(next_date));
